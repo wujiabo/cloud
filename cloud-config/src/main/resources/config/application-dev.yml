@@ -27,6 +27,9 @@ management:
     web:
       exposure:
         include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 
 # feign 配置
 feign:
