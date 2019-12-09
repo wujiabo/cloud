@@ -45,6 +45,8 @@ services:
     hostname: cloud-gateway
     image: cloud-gateway
     depends_on:
+      - cloud-registry
+      - cloud-redis
       - cloud-config
 
   cloud-monitor:
@@ -58,4 +60,6 @@ services:
     hostname: cloud-monitor
     image: cloud-monitor
     depends_on:
-     - cloud-config
+      - cloud-registry
+      - cloud-redis
+      - cloud-config
