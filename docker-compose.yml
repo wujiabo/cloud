@@ -1,0 +1,61 @@
+version: "2.2"
+services:
+  cloud-redis:
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always
+    container_name: cloud-redis
+    hostname: cloud-redis
+
+  cloud-registry:
+    build:
+      context: ./
+      dockerfile: ./cloud-registry/Dockerfile
+    restart: always
+    ports:
+      - 8001:8001
+    container_name: cloud-registry
+    hostname: cloud-registry
+    image: cloud-registry
+    depends_on:
+      - cloud-redis
+
+  cloud-config:
+    build:
+      context: ./
+      dockerfile: ./cloud-config/Dockerfile
+    restart: always
+    ports:
+      - 8002:8002
+    container_name: cloud-config
+    hostname: cloud-config
+    image: cloud-config
+    depends_on:
+      - cloud-registry
+
+  cloud-gateway:
+    build:
+      context: ./
+      dockerfile: ./cloud-gateway/Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    container_name: cloud-gateway
+    hostname: cloud-gateway
+    image: cloud-gateway
+    depends_on:
+      - cloud-config
+
+  cloud-monitor:
+    build:
+      context: ./
+      dockerfile: ./cloud-monitor/Dockerfile
+    restart: always
+    ports:
+      - 8003:8003
+    container_name: cloud-monitor
+    hostname: cloud-monitor
+    image: cloud-monitor
+    depends_on:
+     - cloud-config
