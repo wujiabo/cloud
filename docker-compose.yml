@@ -63,3 +63,27 @@ services:
       - cloud-registry
       - cloud-redis
       - cloud-config
+  cloud-demo:
+    build:
+      context: ./
+      dockerfile: ./cloud-service/cloud-demo/Dockerfile
+    restart: always
+    container_name: cloud-demo
+    hostname: cloud-demo
+    image: cloud-demo
+    depends_on:
+      - cloud-registry
+      - cloud-redis
+      - cloud-config
+  cloud-test:
+    build:
+      context: ./
+      dockerfile: ./cloud-service/cloud-test/Dockerfile
+    restart: always
+    container_name: cloud-test
+    hostname: cloud-test
+    image: cloud-test
+    depends_on:
+      - cloud-registry
+      - cloud-redis
+      - cloud-config
