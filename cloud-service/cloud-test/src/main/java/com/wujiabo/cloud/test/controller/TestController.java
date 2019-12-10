@@ -1,6 +1,7 @@
 package com.wujiabo.cloud.test.controller;
 
 import com.wujiabo.cloud.test.feign.DemoFeign;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/test")
 public class TestController {
@@ -18,13 +20,13 @@ public class TestController {
 
     @GetMapping("/test")
     public String test(@RequestParam(value = "name", required = true) String name, HttpServletRequest servletRequest) {
-        System.out.println("demo2@" + servletRequest.getHeader("x-token"));
-        return "@@@@" + name;
+        log.info("getHeader:{}",servletRequest.getHeader("x-token"));
+        return "@@@@";
     }
 
     @GetMapping("/test1")
     public String test1(HttpServletRequest servletRequest) {
-        System.out.println("test@" + servletRequest.getHeader("x-token"));
+        log.info("getHeader:{}",servletRequest.getHeader("x-token"));
         return demoFeign.test1();
     }
 
