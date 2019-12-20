@@ -12,6 +12,9 @@ import java.io.Serializable;
 public class CloudResponse<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final Integer SUCCESS = 0;
+    public static final Integer FAIL = 1;
+
     @Getter
     @Setter
     private int code;
@@ -26,31 +29,31 @@ public class CloudResponse<T> implements Serializable {
     private T data;
 
     public static <T> CloudResponse<T> ok() {
-        return restResult(null, ResponseConstants.SUCCESS, null);
+        return restResult(null, SUCCESS, null);
     }
 
     public static <T> CloudResponse<T> ok(T data) {
-        return restResult(data, ResponseConstants.SUCCESS, null);
+        return restResult(data, SUCCESS, null);
     }
 
     public static <T> CloudResponse<T> ok(T data, String msg) {
-        return restResult(data, ResponseConstants.SUCCESS, msg);
+        return restResult(data, SUCCESS, msg);
     }
 
     public static <T> CloudResponse<T> failed() {
-        return restResult(null, ResponseConstants.FAIL, null);
+        return restResult(null, FAIL, null);
     }
 
     public static <T> CloudResponse<T> failed(String msg) {
-        return restResult(null, ResponseConstants.FAIL, msg);
+        return restResult(null, FAIL, msg);
     }
 
     public static <T> CloudResponse<T> failed(T data) {
-        return restResult(data, ResponseConstants.FAIL, null);
+        return restResult(data, FAIL, null);
     }
 
     public static <T> CloudResponse<T> failed(T data, String msg) {
-        return restResult(data, ResponseConstants.FAIL, msg);
+        return restResult(data, FAIL, msg);
     }
 
     private static <T> CloudResponse<T> restResult(T data, int code, String msg) {
