@@ -65,6 +65,9 @@ public class TokenValidFilter implements GlobalFilter, Ordered {
     }
 
     private boolean isStartWith(String requestUri) {
+        if(requestUri.endsWith("/api/auth/login")){
+            return true;
+        }
         return false;
     }
 

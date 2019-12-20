@@ -5,11 +5,13 @@ import com.wujiabo.cloud.common.feign.properties.HeaderInheritedProperties;
 import com.wujiabo.cloud.common.feign.strategy.HeaderInheritedStrategy;
 import feign.RequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -25,6 +27,7 @@ import java.util.Enumeration;
 public class HeaderInheritedConfiguration {
 
     @Bean
+    @Primary
     public HeaderInheritedStrategy headerInheritedStrategy() {
         return new HeaderInheritedStrategy();
     }
