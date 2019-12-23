@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Collection<? extends GrantedAuthority> authorities = null;
-        return new UserDetailDto("admin","123456",authorities);
+        return new UserDetailDto("admin","$2a$10$OO0TQFDBDpw8S8CQTh6c0.S/y.yFlWrxYVv.WCVBMSXrdgAeYoknq",authorities);
     }
 
 }
