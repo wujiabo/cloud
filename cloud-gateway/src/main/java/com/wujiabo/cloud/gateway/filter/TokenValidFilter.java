@@ -50,16 +50,16 @@ public class TokenValidFilter implements GlobalFilter, Ordered {
         if (StringUtils.isBlank(token)) {
             return forbiddenVoidMono(exchange, CloudResponse.failed("User Token Empty !"));
         }
-        try{
-            Claims claims = parseJWT(token);
-            log.info("getId:{}",claims.getId());
-            log.info("getIssuedAt:{}",claims.getIssuedAt());
-            log.info("getSubject:{}",claims.getSubject());
-            log.info("getIssuer:{}",claims.getIssuer());
-        }catch (Exception e){
-            log.error(e.getMessage());
-            return forbiddenVoidMono(exchange, CloudResponse.failed("User Token Forbidden or Expired !"));
-        }
+//        try{
+//            Claims claims = parseJWT(token);
+//            log.info("getId:{}",claims.getId());
+//            log.info("getIssuedAt:{}",claims.getIssuedAt());
+//            log.info("getSubject:{}",claims.getSubject());
+//            log.info("getIssuer:{}",claims.getIssuer());
+//        }catch (Exception e){
+//            log.error(e.getMessage());
+//            return forbiddenVoidMono(exchange, CloudResponse.failed("User Token Forbidden or Expired !"));
+//        }
         ServerHttpRequest build = request.mutate().build();
         return chain.filter(exchange.mutate().request(build).build());
     }

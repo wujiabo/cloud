@@ -4,7 +4,7 @@ public interface SecurityConstants {
 	/**
 	 * token
 	 */
-	String TOKEN_KEY = "cloud_token";
+	String TOKEN_KEY = "x-token";
 	/**
 	 * 标志
 	 */
