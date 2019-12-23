@@ -1,7 +1,7 @@
 package com.wujiabo.cloud.common.feign.config;
 
 import com.netflix.hystrix.Hystrix;
-import com.wujiabo.cloud.common.feign.context.CloudRequestContext;
+import com.wujiabo.cloud.common.feign.context.FeignRequestContext;
 import com.wujiabo.cloud.common.feign.properties.HeaderInheritedProperties;
 import feign.RequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,22 +27,22 @@ public class HeaderInheritedConfiguration {
     @Bean
     public RequestInterceptor requestInterceptor() {
         return requestTemplate -> {
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
-                    .getRequestAttributes();
-            if (attributes != null) {
-                HttpServletRequest request = attributes.getRequest();
-                Enumeration<String> headerNames = request.getHeaderNames();
-                log.info("ServletRequestAttributes headerNames {}", Thread.currentThread().getName(), headerNames);
-                if (headerNames != null) {
-                    while (headerNames.hasMoreElements()) {
-                        String name = headerNames.nextElement();
-                        String header = request.getHeader(name);
-                        requestTemplate.header(name, header);
-                    }
-                }
-            }
+//            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
+//                    .getRequestAttributes();
+//            if (attributes != null) {
+//                HttpServletRequest request = attributes.getRequest();
+//                Enumeration<String> headerNames = request.getHeaderNames();
+//                log.info("ServletRequestAttributes headerNames {}", Thread.currentThread().getName(), headerNames);
+//                if (headerNames != null) {
+//                    while (headerNames.hasMoreElements()) {
+//                        String name = headerNames.nextElement();
+//                        String header = request.getHeader(name);
+//                        requestTemplate.header(name, header);
+//                    }
+//                }
+//            }
 
-            CloudRequestContext context = CloudRequestContext.getCurrentContext();
+            FeignRequestContext context = FeignRequestContext.getCurrentContext();
 
             String loginUserId = context.getLoginUserId();
             if (!StringUtils.isEmpty(loginUserId)) {

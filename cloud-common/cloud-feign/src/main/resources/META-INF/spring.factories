@@ -1,4 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.wujiabo.cloud.common.feign.config.ErrorDecoderConfiguration,\
-com.wujiabo.cloud.common.feign.config.CloudWebMvcConfiguration,\
+com.wujiabo.cloud.common.feign.config.FeignWebMvcConfiguration,\
 com.wujiabo.cloud.common.feign.config.HeaderInheritedConfiguration

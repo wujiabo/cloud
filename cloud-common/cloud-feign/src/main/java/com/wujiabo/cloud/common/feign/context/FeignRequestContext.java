@@ -5,34 +5,34 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 
 @Slf4j
-public class CloudRequestContext implements Serializable {
-    private static final ThreadLocal<CloudRequestContext> contextHolder = new InheritableThreadLocal();
+public class FeignRequestContext implements Serializable {
+    private static final ThreadLocal<FeignRequestContext> contextHolder = new InheritableThreadLocal();
 
     private String loginUserId;
     private String token;
 
-    private CloudRequestContext() {
+    private FeignRequestContext() {
     }
 
-    public static synchronized CloudRequestContext getCurrentContext() {
-        CloudRequestContext context = contextHolder.get();
+    public static synchronized FeignRequestContext getCurrentContext() {
+        FeignRequestContext context = contextHolder.get();
         if (context == null) {
-            log.info("getCurrentContext():RequestContext is null, new RequestContext() in Thread " + Thread.currentThread().getName());
-            contextHolder.set(new CloudRequestContext());
+            log.info("new RequestContext() in Thread {}", Thread.currentThread().getName());
+            contextHolder.set(new FeignRequestContext());
             context = contextHolder.get();
         }
         return context;
     }
 
     public void close() {
+        log.info("RequestContext close {}", Thread.currentThread().getName());
         this.reset();
-        log.info("RequestContext close");
         contextHolder.remove();
     }
 
 
     public void reset() {
-        log.info("RequestContext reset");
+        log.info("RequestContext reset {}", Thread.currentThread().getName());
         this.loginUserId = null;
         this.token = null;
     }
